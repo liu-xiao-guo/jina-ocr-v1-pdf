@@ -18,6 +18,9 @@ docs = ep.list_documents()
 doc_indices = [d["index"] for d in docs]
 
 with st.sidebar:
+    st.header("Search / chat scope")
+    scope = st.multiselect("Documents to search", doc_indices, default=doc_indices, label_visibility="collapsed")
+    st.divider()
     st.header("Indexed documents")
     if docs:
         for d in docs:
@@ -30,8 +33,6 @@ with st.sidebar:
                     st.rerun()
     else:
         st.caption("Nothing indexed yet. Upload a PDF first.")
-    st.divider()
-    scope = st.multiselect("Search / chat scope", doc_indices, default=doc_indices)
 
 tab_upload, tab_search, tab_chat = st.tabs(["1 · Upload & index", "2 · Hybrid search", "3 · Ask (RAG)"])
 
